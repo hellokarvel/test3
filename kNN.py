@@ -30,7 +30,7 @@ def classify0(inX,dataSet,labels,k):
       return   sortedClassCount[0][0]#只输出第一项的key。第二个0是关键。
 
 def file2matrix(filename):
-      fr = open(fliename)
+      fr = open(filename)
       array0Lines = fr.readlines()    #依次读取每行
       numberOfLines = len(array0Lines)#返回对象（字符、列表、元组等）长度或项目个数
       returnMat =zeros((numberOfLines,3))#创建行*列矩阵
@@ -39,7 +39,15 @@ def file2matrix(filename):
       for line in array0Lines:
             line=line.strip()# 方法用于移除字符串头尾指定的字符
             listFromLine = line.split('\t')#split() 通过指定分隔符对字符串进行切片
-            returnMat[index,:]=listFromLine[0:3]#
-            classLabelVector.append(int(listFromLine[-1]))
+            returnMat[index,:]=listFromLine[0:3]#return的第index行放入前三个，注意*是三个
+            if listFromLine[-1] == 'didntLike':#与原书有出入
+                  classLabelVector.append(1)
+            elif listFromLine[-1] == 'smallDoses':
+                  classLabelVector.append(2)
+            elif listFromLine[-1] == 'largeDoses':
+                  classLabelVector.append(3)
             index +=1
       return returnMat,classLabelVector
+
+
+
