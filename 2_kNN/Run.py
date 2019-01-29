@@ -1,11 +1,5 @@
 #!/usr/bin/python
 # -*- coding: <encoding name> -*-
-from numpy import *
-import operator
-import matplotlib
-import Showdate
-import kNN
-import matplotlib.pyplot as plt
 
 
 #print(mat1,lab1)

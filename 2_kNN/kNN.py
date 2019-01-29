@@ -49,5 +49,46 @@ def file2matrix(filename):
             index +=1
       return returnMat,classLabelVector
 
+def autoNorm(dataSet):
+      minVals = dataSet.min(0)
+      maxVals = dataSet.max(0)
+      ranges  = maxVals-minVals
+      normDataSet = zeros(shape(dataSet))#创建dataSet等行列矩阵
+      m = dataSet.shape[0]
+      normDataSet = dataSet - tile(minVals,(m,1))#数据- 一列
+      normDataSet = normDataSet/tile(ranges,(m,1))#数据/范围
+      return normDataSet, ranges, minVals
 
+def datingClassTest():
+      hoRatio = 0.1
+      datingDataMat,datingLabels = file2matrix('datingTestSet.txt')
+      normMat, ranges, minVals = autoNorm(datingDataMat)
+      m = normMat.shape[0]#行代表数据的数量，乘0.1代表取10%数据
+      numTestVecs = int(m*hoRatio)
+      errorCount = 0.0
+      for i in range(numTestVecs):
+            classifierRestult = classify0(normMat[i,:],normMat[ \
+                  numTestVecs:m,:],datingLabels[numTestVecs:m],3)
+            print('the classifier came back with: %d,the real answer is:%d' %(classifierRestult,datingLabels[i]))
+            if(classifierRestult != datingLabels[i]):errorCount +=1.0
+      print('the total error rate is :%f' %(errorCount/float(numTestVecs)))
 
+def classifyPerson(filename):
+      resultList = ['not at all','in small doses ','in large doses']
+      percentTats = float(input('percentage of time spent playing video games?'))
+      ffmiles = float(input('frequent flier miles earned per year?'))
+      iceCream = float(input('liters of ice cream consumed per years ?'))
+      datingDataMat,datingLabels = file2matrix(filename)
+      normMat, ranges, minVals = autoNorm(datingDataMat)
+      inArr = array([ffmiles,percentTats,iceCream])
+      classifierResult = classify0((inArr-minVals)/ranges,normMat,datingLabels,3)
+      print('You will probably like this peison:',resultList[classifierResult-1])
+
+if __name__ == '__main__':#使文件既是函数，又是主函数
+    #打开的文件名
+    # filename = "datingTestSet.txt"
+    # #打开并处理数据
+    # datingDataMat, datingLabels = file2matrix(filename)
+    # showdatas(datingDataMat, datingLabels)
+      filename = 'datingTestSet.txt'
+      classifyPerson(filename)

@@ -1,6 +1,6 @@
 import operator
 from numpy import *
-import kNN
+#import kNN
 '''dict = {'Name': 1, 'Age': 7, 'Class': 4, 'Class2': 3}
 a = sorted(dict.items(), key=operator.itemgetter(1), reverse=True)
 print(a[0][1])'''
@@ -22,5 +22,17 @@ print(f)'''
 #dict['Age']:  7
 #re, cla = kNN.file2matrix('a.txt')
 
-mat1,lab1=kNN.file2matrix('a.txt')
-print(mat1,lab1)
+#mat1,lab1=kNN.file2matrix('a.txt')
+#print(mat1,lab1)
+
+# print(shape(a))
+# txtmat,e=kNN.file2matrix('a.txt')
+# list1= [1,2,3]
+#
+# print(list1[0])
+#print('the classifier came back with: %d,the real answer is:%d' %(5,6))
+# a,b,c=kNN.autoNorm(txtmat)
+
+# print(a)
+# print(b)
+# print(c)
