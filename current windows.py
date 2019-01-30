@@ -32,7 +32,7 @@ print(f)'''
 # print(list1[0])
 #print('the classifier came back with: %d,the real answer is:%d' %(5,6))
 # a,b,c=kNN.autoNorm(txtmat)
-
-# print(a)
+a = [1, 1, 'yes']
+print(a[:2])
 # print(b)
 # print(c)
